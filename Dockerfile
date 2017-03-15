@@ -18,9 +18,11 @@ RUN apt-get update && \
                        python \
                        python-pexpect \
                        python3 \
-                       python3-pip \
                        python3-pexpect \
+                       python3-pip \
+                       repo \
                        socat \
+                       sudo \
                        texinfo \
                        unzip \
                        wget \
