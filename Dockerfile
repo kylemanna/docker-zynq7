@@ -15,6 +15,7 @@ RUN apt-get update && \
                        gawk \
                        gcc-multilib \
                        git-core \
+                       libgtk2.0-0 \
                        libsdl1.2-dev \
                        python \
                        python-pexpect \
@@ -27,6 +28,8 @@ RUN apt-get update && \
                        texinfo \
                        unzip \
                        wget \
+                       x11-utils \
+                       xvfb \
                        && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
