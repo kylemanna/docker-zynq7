@@ -35,5 +35,11 @@ WORKDIR /build
 ENV USE_CCACHE 1
 ENV CCACHE_DIR /build/.ccache
 
+# https://github.com/docker-library/python/blob/11c0afba4b7b28bc671ec92ec16c0b04380dbc05/3.6/Dockerfile
+# http://bugs.python.org/issue19846
+# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
+ENV LANG en_US.UTF-8
+RUN locale-gen en_US.UTF-8; DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+
 COPY docker_entrypoint.sh /root/docker_entrypoint.sh
 ENTRYPOINT ["/root/docker_entrypoint.sh"]
