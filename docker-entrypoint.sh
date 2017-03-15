@@ -24,7 +24,7 @@ if [ -z ${USER_ID+x} ]; then USER_ID=1000; fi
 if [ -z ${GROUP_ID+x} ]; then GROUP_ID=1000; fi
 msg="docker_entrypoint: Creating user UID/GID [$USER_ID/$GROUP_ID]" && dbg_echo $msg
 groupadd -g $GROUP_ID -r build && \
-useradd -u $USER_ID --create-home -r -g build build
+useradd -u $USER_ID -d "$WORKDIR" -r -g build build
 dbg_echo "$msg - done"
 
 dbg_echo ""
@@ -42,5 +42,5 @@ if [ -z ${MAKEFLAGS+x} ]; then
 fi
 
 # Execute command as `build` user
-export HOME=/home/build
+export HOME="$WORKDIR"
 exec sudo -E -u build $args

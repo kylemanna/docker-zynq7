@@ -7,7 +7,7 @@
 
 ## Assumptions
 
-User mounts the root of their Yocto OpenEmbedded build with `docker run -v /path/to/yocto-root:/build`
+User mounts the root of their Yocto OpenEmbedded build with `docker run -v /path/to/yocto-root:/zynq7`
 
 ## Features
 
