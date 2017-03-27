@@ -36,7 +36,9 @@ RUN apt-get update && \
 ENV LANG=en_US.UTF-8 \
     WORKDIR=/zynq7 \
     CCACHE_DIR=/build/.ccache \
-    USE_CCACHE=1
+    USE_CCACHE=1 \
+    SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+
 
 # https://github.com/docker-library/python/blob/11c0afba4b7b28bc671ec92ec16c0b04380dbc05/3.6/Dockerfile
 # http://bugs.python.org/issue19846
