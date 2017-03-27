@@ -7,7 +7,9 @@
 
 ## Assumptions
 
-User mounts the root of their Yocto OpenEmbedded build with `docker run -v /path/to/yocto-root:/zynq7`
+User mounts the root of their Yocto OpenEmbedded build with:
+
+    docker run --rm -it -v /PATH/TO/YOCTO_ROOT:/zynq7 -v /opt/Xilinx:/xilinx -v $SSH_AUTH_SOCK:/tmp/ssh-agent.sock kylemanna/zynq7
 
 ## Features
 
