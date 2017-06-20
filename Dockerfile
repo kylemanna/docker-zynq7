@@ -15,6 +15,7 @@ RUN apt-get update && \
                        gawk \
                        gcc-multilib \
                        git-core \
+                       iputils-ping \
                        libgtk2.0-0 \
                        libsdl1.2-dev \
                        python \
