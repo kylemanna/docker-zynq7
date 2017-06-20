@@ -18,6 +18,7 @@ RUN apt-get update && \
                        iputils-ping \
                        libgtk2.0-0 \
                        libsdl1.2-dev \
+                       locales \
                        python \
                        python-pexpect \
                        python3 \
