@@ -38,7 +38,7 @@ RUN apt-get update && \
 
 ENV LANG=en_US.UTF-8 \
     WORKDIR=/zynq7 \
-    CCACHE_DIR=/build/.ccache \
+    CCACHE_DIR=/zynq7/.ccache \
     USE_CCACHE=1 \
     SSH_AUTH_SOCK=/tmp/ssh-agent.sock
 
