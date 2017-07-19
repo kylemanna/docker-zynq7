@@ -53,5 +53,5 @@ RUN mkdir "$WORKDIR" && chmod 777 "$WORKDIR" && chown 1000:1000 "$WORKDIR"
 RUN mkdir "/var/lib/jenkins" && chmod 777 "/var/lib/jenkins"
 WORKDIR $WORKDIR
 
-COPY docker-entrypoint.sh jsh /usr/local/bin/
+COPY docker-entrypoint.sh nssh /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
