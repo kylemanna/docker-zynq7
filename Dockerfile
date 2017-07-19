@@ -49,6 +49,7 @@ ENV LANG=en_US.UTF-8 \
 RUN locale-gen $LANG; DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
 RUN mkdir "$WORKDIR" && chmod 777 "$WORKDIR" && chown 1000:1000 "$WORKDIR"
+RUN mkdir "/var/lib/jenkins" && chmod 777 "/var/lib/jenkins"
 WORKDIR $WORKDIR
 
 COPY docker-entrypoint.sh jsh /usr/local/bin/
