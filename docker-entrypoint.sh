@@ -3,14 +3,14 @@ set -e
 
 # This script designed to be used a docker ENTRYPOINT "workaround" missing docker
 # feature discussed in docker/docker#7198, allow to have executable in the docker
-# container manipulating files in the shared volume owned by the USER_ID:GROUP_ID.
+# container manipulating files in the shared volume owned by the BUILD_UID:BUILD_GID.
 #
-# It creates a user named `build` with selected USER_ID and GROUP_ID (or
+# It creates a user named `build` with selected BUILD_UID and BUILD_GID (or
 # 1000 if not specified).
 
 # Example:
 #
-#  docker run -ti -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) imagename bash
+#  docker run -ti -e BUILD_UID=$(id -u) -e BUILD_GID=$(id -g) imagename bash
 #
 
 dbg_echo() {
@@ -19,12 +19,12 @@ dbg_echo() {
     fi
 }
 
-# Reasonable defaults if no USER_ID/GROUP_ID environment variables are set.
-if [ -z ${USER_ID+x} ]; then USER_ID=1000; fi
-if [ -z ${GROUP_ID+x} ]; then GROUP_ID=1000; fi
-msg="docker_entrypoint: Creating user UID/GID [$USER_ID/$GROUP_ID]" && dbg_echo $msg
-groupadd -g $GROUP_ID -r build && \
-useradd -u $USER_ID -d "$WORKDIR" -r -g build build
+# Reasonable defaults if no BUILD_UID/BUILD_GID environment variables are set.
+BUILD_UID=${BUILD_UID:-1000}
+BUILD_GID=${BUILD_GID:-1000}
+msg="docker_entrypoint: Creating user UID/GID [$BUILD_UID/$BUILD_GID]" && dbg_echo $msg
+groupadd -g $BUILD_GID -r build && \
+useradd -u $BUILD_UID -d "$WORKDIR" -r -g build build
 dbg_echo "$msg - done"
 
 dbg_echo ""
