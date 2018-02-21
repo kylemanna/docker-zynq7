@@ -19,6 +19,23 @@ dbg_echo() {
     fi
 }
 
+# Optimal MAKEFLAGS argument if not already defined
+if [ -z ${MAKEFLAGS+x} ]; then
+    # Add 1 assuming disk IO will block processes from time to time.
+    export MAKEFLAGS=$((1 + $(grep processor /proc/cpuinfo | wc -l)))
+fi
+
+args="$@"
+# Default to 'bash' if no arguments are provided
+if [ -z "$args" ]; then
+    args="bash"
+fi
+
+# Jenkins runs as a user that can't create users, just run the command
+if [ -n "${JENKINS_URL}" ]; then
+    exec "$@"
+fi
+
 # Reasonable defaults if no BUILD_UID/BUILD_GID environment variables are set.
 BUILD_UID=${BUILD_UID:-1000}
 BUILD_GID=${BUILD_GID:-1000}
@@ -28,18 +45,6 @@ useradd -u $BUILD_UID -d "$WORKDIR" -r -g build build
 dbg_echo "$msg - done"
 
 dbg_echo ""
-
-# Default to 'bash' if no arguments are provided
-args="$@"
-if [ -z "$args" ]; then
-  args="bash"
-fi
-
-# Optimal MAKEFLAGS argument if not already defined
-if [ -z ${MAKEFLAGS+x} ]; then
-    # Add 1 assuming disk IO will block processes from time to time.
-    export MAKEFLAGS=$((1 + $(grep processor /proc/cpuinfo | wc -l)))
-fi
 
 # Execute command as `build` user
 export HOME="$WORKDIR"
