@@ -7,6 +7,7 @@ MAINTAINER Kyle Manna <kyle@kylemanna.com>
 
 RUN apt-get update && \
     apt-get install -y \
+                       apt-transport-https \
                        build-essential \
                        ccache \
                        chrpath \
@@ -34,6 +35,10 @@ RUN apt-get update && \
                        x11-utils \
                        xvfb \
                        && \
+    wget -qO - https://packagecloud.io/github/git-lfs/gpgkey | apt-key add - && \
+    echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main' | tee /etc/apt/sources.list.d/github_git-lfs.list && \
+    apt-get update && \
+    apt-get install -y git-lfs && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV LANG=en_US.UTF-8 \
