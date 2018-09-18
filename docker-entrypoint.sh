@@ -48,4 +48,4 @@ dbg_echo ""
 
 # Execute command as `build` user
 export HOME="$WORKDIR"
-exec sudo -E -u build $args
+exec gosu build $args

@@ -13,6 +13,7 @@ RUN apt-get update && \
                        chrpath \
                        cpio \
                        diffstat \
+                       gosu \
                        gawk \
                        gcc-multilib \
                        git-core \
@@ -28,7 +29,6 @@ RUN apt-get update && \
                        python3-pip \
                        repo \
                        socat \
-                       sudo \
                        texinfo \
                        unzip \
                        wget \
