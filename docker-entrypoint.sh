@@ -22,7 +22,7 @@ dbg_echo() {
 # Optimal MAKEFLAGS argument if not already defined
 if [ -z ${MAKEFLAGS+x} ]; then
     # Add 1 assuming disk IO will block processes from time to time.
-    export MAKEFLAGS=$((1 + $(grep processor /proc/cpuinfo | wc -l)))
+    export MAKEFLAGS=-j$((1 + $(grep processor /proc/cpuinfo | wc -l)))
 fi
 
 args="$@"
