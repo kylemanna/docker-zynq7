@@ -40,7 +40,8 @@ RUN apt-get update && \
     echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main' | tee /etc/apt/sources.list.d/github_git-lfs.list && \
     apt-get update && \
     apt-get install -y git-lfs && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    python3 -m pip install --no-cache-dir unittest-xml-reporting
 
 ENV LANG=en_US.UTF-8 \
     WORKDIR=/zynq7 \
