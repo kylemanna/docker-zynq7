@@ -37,8 +37,8 @@ if [ -n "${JENKINS_URL}" ]; then
 fi
 
 # Reasonable defaults if no BUILD_UID/BUILD_GID environment variables are set.
-BUILD_UID=${BUILD_UID:-1000}
-BUILD_GID=${BUILD_GID:-1000}
+BUILD_UID=${BUILD_UID:-$(stat -c %u /zynq7)}
+BUILD_GID=${BUILD_GID:-$(stat -c %g /zynq7)}
 msg="docker_entrypoint: Creating user UID/GID [$BUILD_UID/$BUILD_GID]" && dbg_echo $msg
 groupadd -g $BUILD_GID -r build && \
 useradd -u $BUILD_UID -d "$WORKDIR" -r -g build build
