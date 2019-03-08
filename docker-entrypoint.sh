@@ -25,15 +25,20 @@ if [ -z ${MAKEFLAGS+x} ]; then
     export MAKEFLAGS=-j$((1 + $(grep processor /proc/cpuinfo | wc -l)))
 fi
 
+# Jenkins runs as a user that can't create users, just run the command
+if [ -n "${JENKINS_URL}" ]; then
+    exec "$@"
+fi
+
 args="$@"
 # Default to 'bash' if no arguments are provided
 if [ -z "$args" ]; then
     args="bash"
 fi
 
-# Jenkins runs as a user that can't create users, just run the command
-if [ -n "${JENKINS_URL}" ]; then
-    exec "$@"
+# Can't create users, run bash by default
+if [ $UID != 0 ]; then
+    exec "$args"
 fi
 
 # Reasonable defaults if no BUILD_UID/BUILD_GID environment variables are set.
