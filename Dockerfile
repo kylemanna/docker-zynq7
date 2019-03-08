@@ -5,19 +5,21 @@ FROM ubuntu:16.04
 
 MAINTAINER Kyle Manna <kyle@kylemanna.com>
 
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt update && \
+    apt install -y --no-install-recommends \
                        apt-transport-https \
                        build-essential \
                        ccache \
                        chrpath \
                        cpio \
                        diffstat \
-                       gosu \
+                       dvipng \
                        gawk \
                        gcc-multilib \
                        git-core \
+                       gosu \
                        iputils-ping \
+                       latexmk\
                        libgtk2.0-0 \
                        libnss-wrapper \
                        libsdl1.2-dev \
@@ -31,6 +33,8 @@ RUN apt-get update && \
                        repo \
                        socat \
                        texinfo \
+                       texlive-fonts-recommended \
+                       texlive-latex-extra \
                        unzip \
                        wget \
                        x11-utils \
@@ -38,10 +42,11 @@ RUN apt-get update && \
                        && \
     wget -qO - https://packagecloud.io/github/git-lfs/gpgkey | apt-key add - && \
     echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main' | tee /etc/apt/sources.list.d/github_git-lfs.list && \
-    apt-get update && \
-    apt-get install -y git-lfs && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    python3 -m pip install --no-cache-dir unittest-xml-reporting
+    apt update && \
+    apt install -y git-lfs && \
+    apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    python3 -m pip install --upgrade --no-cache-dir pip && \
+    python3 -m pip install --no-cache-dir setuptools unittest-xml-reporting
 
 ENV LANG=en_US.UTF-8 \
     WORKDIR=/zynq7 \
