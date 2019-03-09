@@ -14,6 +14,7 @@ RUN apt update && \
                        cpio \
                        diffstat \
                        dvipng \
+                       file \
                        gawk \
                        gcc-multilib \
                        git-core \
@@ -24,6 +25,7 @@ RUN apt update && \
                        libnss-wrapper \
                        libsdl1.2-dev \
                        locales \
+                       openssh-client \
                        python \
                        python-pexpect \
                        python3 \
@@ -31,6 +33,7 @@ RUN apt update && \
                        python3-pip \
                        python3-requests \
                        repo \
+                       rsync \
                        socat \
                        texinfo \
                        texlive-fonts-recommended \
